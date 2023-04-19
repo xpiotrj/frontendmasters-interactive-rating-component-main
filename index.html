@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <script>
+    
+
+    function switch_focused(element){
+      var all_ranks = document.getElementsByClassName('active_rank');
+      Array.prototype.forEach.call(all_ranks, function(div, index) {
+          all_ranks.item(index).className = 'rank';
+      });
+      element.className = "active_rank";
+    }
+
+    function send_opinion(){
+      const first_page = document.getElementById('page1');
+      const second_page = document.getElementById('page2');
+      var all_ranks = document.getElementsByClassName('active_rank');
+      var value;
+      Array.prototype.forEach.call(all_ranks, function(div, index) {
+          value = all_ranks.item(index).id;
+      });
+      if(value === undefined){
+        return;
+      }
+      document.getElementById("opinion").innerHTML = 'You selected ' + value +  ' out of 5';
+      first_page.style.display = 'none';
+
+      second_page.style.display = 'block';
+    }
+
+  </script>
+
+</head>
+<body>
+
+  <!-- Rating state start -->
+  <div class="container">
+    <div class="first_page" id="page1">
+    <div class="star">
+      <img src="images/icon-star.svg" alt="">
+    </div>
+    <div class="title">How did we do?</div>
+  
+    <div class="info">Please let us know how we did with your support request. All feedback is appreciated 
+      to help us improve our offering!</div>
+
+    <div class="ranks">
+      <div class="rank" id="1" onclick="switch_focused(this)">1</div>
+      <div class="rank" id="2" onclick="switch_focused(this)">2</div>
+      <div class="rank" id="3" onclick="switch_focused(this)">3</div>
+      <div class="rank" id="4" onclick="switch_focused(this)">4</div>
+      <div class="rank" id="5" onclick="switch_focused(this)">5</div>
+    </div>
+    <div class="submit" onclick="send_opinion()">SUBMIT</div>
+
+  
+  </div>
+
+
+  <div class="second_page" id="page2" style="display: none;">
+    <div class="thankyou_img">
+      <img src="images/illustration-thank-you.svg" alt="">
+    </div>
+    <div class="opinion" id="opinion">You selected x out of 5</div>
+
+    <div class="thankyou">Thank you!</div>
+
+    <div class="more_info">We appreciate you taking the time to give a rating. If you ever need more support, 
+      don’t hesitate to get in touch!</div>
+
+  </div>
+</div>
+</body>
+</html>
